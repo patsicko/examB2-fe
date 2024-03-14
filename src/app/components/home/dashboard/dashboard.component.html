@@ -1,0 +1,182 @@
+
+<div class="bg-gray-200 h-screen flex ">
+    
+    <div class="bg-[#394B67] w-1/6 p-2">
+        <h2 class="text-white">dashboard</h2>
+        <hr class="mt-10" >
+        <div class="">
+            <div>
+                <mat-icon class="text-white">home</mat-icon><button class="mt-2 px-5 rounded text-white hover:text-black cursor-pointer" type="button" > Home</button><br>
+            </div>
+            <div>
+                <mat-icon class="text-white">account_circle</mat-icon>
+                <button class="mt-2   p-5 rounded hover:text-black text-white cursor-pointer" type="button" (click)="getStudent()" > Students</button><br>
+            </div>
+
+            <div>
+                <mat-icon class="text-white">account_circle</mat-icon>
+                <button class="mt-2   p-5 rounded hover:text-black text-white cursor-pointer" type="button" (click)="calculate()" > Exam</button><br>
+            </div>
+            <hr>
+            <div>
+                <mat-icon class="text-white">logout</mat-icon>
+                <button class="mt-10   p-5 rounded hover:text-black text-white cursor-pointer" type="button" > Logout</button> <br>
+            </div>
+            
+        
+        </div>
+    </div>
+
+    <div class="overflow-y-auto">
+        <div *ngIf="students">
+        <table  class="table-auto min-w-full divide-y divide-gray-200 ">
+            <thead *ngIf="students "  class="bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Student Id</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
+               
+                
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> View marks</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Add marks</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Delete</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200" >
+              
+              <tr *ngFor="let student of students">
+                <td class="px-6 py-4 whitespace-nowrap">{{student.id}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{student.firstName}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{student.lastName}}</td>
+               
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                        <button >view</button></span>
+                  </td>
+              
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                      <button>edit</button></span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"><button >Delete</button></span>
+                </td>
+                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+          <table *ngIf="exams" class="table-auto min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Id</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>
+                <button type="button" (click)="registrationIsClicked(true)"  class="bg-green-700 p-2 rounded text-white">Add student</button>
+               
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200" >
+             <ng-container *ngFor="let student of exams" >
+              <tr>
+              <td class="px-6 py-4 whitespace-nowrap">{{student.id}}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{student.firstName}}</td>
+              
+              <table >
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Subject</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Marks</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Grade</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+           
+              <ng-container *ngFor="let exam of student.exams">
+                 
+                
+                <tr >
+                  
+                <td class="px-6 py-4 whitespace-nowrap">{{exam.subject}}</td> 
+                <td class="px-6 py-4 whitespace-nowrap">{{exam.marks}}</td> 
+
+                <td class="px-6 py-4 whitespace-nowrap">{{exam.grade}}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{exam.type}}</td>
+
+              
+                <!-- <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                        <button >view</button></span>
+                  </td>
+              
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                      <button>edit</button></span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"><button >Delete</button></span>
+                </td> -->
+
+              </tr>
+              
+              </ng-container>
+
+                   
+              <td class="px-6 py-4 whitespace-nowrap"> Total marks: {{student.totalMarks}}</td>
+              <td class="px-6 py-4 whitespace-nowrap">Average: {{student.average}}</td>
+              <button type="button" class="bg-green-700 p-2 rounded text-white" (click)="studentAddMarksClicked(true); addMarks(student.id)" >Add marks</button>
+
+            </table>
+            
+
+            </tr>
+            </ng-container>
+            </tbody>
+          </table>
+
+       <!-- Form to add new student -->
+          <div *ngIf="showStudentRegistration" class="w-full h-3/5 z-50 fixed top-0 bg-green-200 shadow-md rounded px-8 pt-6 pb-8 max-w-md mx-auto">
+            <div class="flex justify-between items-center">
+              <h1 class="text-2xl font-bold text-gray-800">Add student</h1>
+              <mat-icon class="text-red-500" (click)="closeRegistrationForm(false)" >close</mat-icon>
+            </div>
+            <form [formGroup]="studentForm" class="mt-4">
+              <div class="mb-2">
+                <label for="firstName" class="block text-gray-700 text-md mb-2">Enter first name</label>
+                <input type="text" name="firstName"  class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline" formControlName="firstName">
+                <div class="text-red-500" *ngIf="studentForm.get('firstName')?.hasError('required') && (studentForm.get('firstName')?.touched || submitted)">First name is required</div>
+              </div>
+              <div>
+                <label for="lastName" class="block text-gray-700 text-md mb-2">Enter last name</label>
+                <input type="text" name="lastName"  class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline" formControlName="lastName">
+                <div class="text-red-500" *ngIf="studentForm.get('lastName')?.hasError('required') && (studentForm.get('lastName')?.touched || submitted)">Last name is required</div>
+              </div><br>
+              <button type="button" class="p-3 bg-[#2F8294] rounded text-white" (click)="registerStudent()"> Register</button>
+            </form>
+          </div>
+
+
+          <!-- Form to add marks for student -->
+          <div *ngIf="showFormOfMarks" class="w-full h-auto z-50 fixed top-0 bg-green-200 shadow-md rounded px-8 pt-6 pb-8 max-w-md mx-auto">
+            <div class="flex justify-between items-center">
+              <h1 class="text-2xl font-bold text-gray-800">Add Marks</h1>
+              <mat-icon class="text-red-500" (click)="closeFormOfMarks(false)" >close</mat-icon>
+            </div>
+            <form [formGroup]="marksForm" class="mt-4">
+              <div class="mb-2">
+                <label for="subject" class="block text-gray-700 text-md mb-2">Enter subject</label>
+                <input type="text" name="subject"  class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline" formControlName="subject">
+                <div class="text-red-500" *ngIf="marksForm.get('subject')?.hasError('required') && (marksForm.get('subject')?.touched || submitted)">Subject is required</div>
+              </div>
+              <div>
+                <label for="marks" class="block text-gray-700 text-md mb-2">Enter marks</label>
+                <input type="number" name="marks"  class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline" formControlName="marks">
+                <div class="text-red-500" *ngIf="marksForm.get('marks')?.hasError('required') && (marksForm.get('marks')?.touched || submitted)">Marks is required</div>
+              </div>
+              <div>
+                <label for="type" class="block text-gray-700 text-md mb-2">Enter type</label>
+                <input type="text" name="type"  class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline" formControlName="type">
+                <div class="text-red-500" *ngIf="marksForm.get('type')?.hasError('required') && (marksForm.get('type')?.touched || submitted)">Type is required</div>
+              </div><br>
+              <button type="button" class="p-3 bg-[#2F8294] rounded text-white" (click)="insertMarks()"> Add marks</button>
+            </form>
+          </div>
+    
+    </div>
+</div>

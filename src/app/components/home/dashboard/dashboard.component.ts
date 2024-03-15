@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit, OnDestroy {
   studentForm: FormGroup;
   marksForm: FormGroup;
   showStudentRegistration:boolean=false;
@@ -29,6 +30,24 @@ constructor(private authService:AuthService, private studentFormBuilder: FormBui
   })
 }
 
+
+pollingSubscription:Subscription
+startPolling():void{
+  this.pollingSubscription=interval(1000)
+  .subscribe(()=>{
+    this.getStudent()
+  })
+}
+
+ngOnDestroy(): void {
+  if(this.pollingSubscription){
+    this.pollingSubscription.unsubscribe()
+  }
+}
+ngOnInit(): void {
+ this.startPolling()
+}
+
 registrationIsClicked(value:boolean){
   this.showStudentRegistration=value;
 }
@@ -47,6 +66,13 @@ studentId:number;
 
 addMarks(id:number){
  this.studentId=id
+}
+
+
+logout(){
+  this.authService.adminLogged(false);
+ window.location.reload()
+  
 }
 
 

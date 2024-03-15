@@ -18,6 +18,10 @@ export class HomepageComponent {
     this.showLogin=value
   }
 
+  logout(){
+    window.location.reload()
+  }
+
 
   showLogin:boolean=false;
   showSignup:boolean=false;

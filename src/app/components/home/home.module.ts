@@ -6,7 +6,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule } from '@angular/material/icon';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { LandingpageComponent } from './landingpage/landingpage.component'
+import { LandingpageComponent } from './landingpage/landingpage.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component'
 
 
 
@@ -16,7 +18,9 @@ import { LandingpageComponent } from './landingpage/landingpage.component'
     LoginComponent,
     SignupComponent,
     DashboardComponent,
-    LandingpageComponent
+    LandingpageComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +33,8 @@ import { LandingpageComponent } from './landingpage/landingpage.component'
     HomepageComponent,
     SignupComponent,
     DashboardComponent,
-    LandingpageComponent
+    LandingpageComponent,
+    FooterComponent
   ]
 })
 export class HomeModule { }

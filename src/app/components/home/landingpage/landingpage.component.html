@@ -1,12 +1,15 @@
 <div>
-    <main class="container mx-5 py-16 flex justify-between ">
-        <div class="h-full">
-            <img class="h-full " src="../../../../assets/photos/School-Management-System-Software-Guide.webp" alt="management image">
+    <main class="container mx-5 py-16 flex justify-between gap-x-16 ">
+        <div class="h-full ">
+            <img class="h-3/4 " src="../../../../assets/photos/School-Management-System-Software-Guide.webp" height="500px" alt="management image">
         </div>
-        <div>
-            <h1 class="text-3xl font-bold mb-4">You’re most welcome!</h1>
-            <p class="text-lg">This is Musanze secondary school 
-                management system.</p>
+        <div id="text-reveal" class="text-3xl font-bold text-center text-green-800 bg-gray-200 flex flex-col items-center justify-center rounded-md">
+          <div class="mb-6">
+            <img src="../../../../assets//photos/download.jfif" style="height:150px;" alt="graduation">
+          </div>
+         
+           <h1 class="mt-10" [innerHTML]="displayText" ></h1>
+            
         </div>
        
       </main>

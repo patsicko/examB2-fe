@@ -1,6 +1,16 @@
-<div class="">
+<div class="main">
  <app-homepage></app-homepage>
+<ng-container *ngIf="isAdmin">
+ <app-dashboard></app-dashboard>
+</ng-container>
+
+
+<app-landingpage *ngIf="!isAdmin"></app-landingpage>
+
+ <app-footer class="footer"></app-footer>
  <!-- <app-dashboard></app-dashboard> -->
- <!-- <app-landingpage></app-landingpage> -->
-  <!-- <router-outlet></router-outlet> -->
+
+
+
+  <router-outlet></router-outlet> 
 </div>

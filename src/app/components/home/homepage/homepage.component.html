@@ -20,10 +20,16 @@
             <li>
               <a routerLink="/"  class="text-white hover:text-black cursor-pointer">Home</a>
             </li>
-            <li>
-                <button type="button" (click)="showLoginForm(true)"  class="text-white hover:text-black cursor-pointer"> Login</button>
+            <li *ngIf="!isAdmin">
+                <button type="button" (click)="showLoginForm(true)"  class="text-white hover:text-black cursor-pointer" > Login</button>
+                
             </li>
-            <li>
+
+            <li *ngIf="isAdmin">
+              <button type="button" (click)="showLoginForm(true); logout()"  class="text-white hover:text-black cursor-pointer" > Logout</button>
+            
+          </li>
+            <li *ngIf="!isAdmin">
                 <button type="button" class="text-white hover:text-black cursor-pointer" (click)="showSignupForm(true)" > Signup</button>
                 
             </li>
@@ -31,10 +37,10 @@
         </div>
       </nav>
       
-      <main  class="container mx-5 py-16 flex justify-between ">
+      <!-- <main  class="container mx-5 py-16 flex justify-between ">
      
         <div *ngIf="isAdmin">
-            <app-dashboard></app-dashboard>
+           
         </div>
 
         <div *ngIf="!isAdmin" class="container mx-5 py-16 flex justify-between ">
@@ -47,12 +53,12 @@
                 management system.</p>
         </div>
     </div>
-      </main>
+      </main> -->
     
-    
+<!--     
       <footer class="bg-gray-300 py-4 text-center">
         <p>&copy; 2024 MSSMS. All rights reserved.</p>
-      </footer>
+      </footer> -->
 </div>
 
   

@@ -5,7 +5,7 @@ import { HomepageComponent } from './components/home/homepage/homepage.component
 import { LandingpageComponent } from './components/home/landingpage/landingpage.component';
 
 const routes: Routes = [
-  
+ 
   
 ];
 

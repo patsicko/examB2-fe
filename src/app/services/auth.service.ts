@@ -87,4 +87,12 @@ export class AuthService {
           })
         )
     }
+
+    deleteStudent(id:number):Observable<any>{
+      return this.http.delete(`${this.appUrl}/student/${id}`, {headers:this.headers}).pipe(
+        tap(deletedStudent=>{
+          console.log("student deleted",deletedStudent)
+        })
+      )
+    }
 }

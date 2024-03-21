@@ -21,7 +21,7 @@ export class HomepageComponent {
   logout(){
     window.location.reload()
   }
-
+ 
 
   showLogin:boolean=false;
   showSignup:boolean=false;
@@ -41,7 +41,5 @@ export class HomepageComponent {
   }
 
  
-
-  
 
 }

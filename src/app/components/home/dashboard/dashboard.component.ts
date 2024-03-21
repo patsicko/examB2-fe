@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { interval, Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +18,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
 
-constructor(private authService:AuthService, private studentFormBuilder: FormBuilder){
+constructor(
+  private authService:AuthService,
+  private studentFormBuilder: FormBuilder,
+  private toastr: ToastrService
+  ){
   this.studentForm= this.studentFormBuilder.group({
     firstName: ['',[Validators.required]],
     lastName: ['',[Validators.required]]
@@ -35,7 +40,7 @@ pollingSubscription:Subscription
 startPolling():void{
   this.pollingSubscription=interval(1000)
   .subscribe(()=>{
-    this.getStudent()
+    // this.calculate()
   })
 }
 
@@ -45,7 +50,8 @@ ngOnDestroy(): void {
   }
 }
 ngOnInit(): void {
- this.startPolling()
+//  this.startPolling()
+this.getStudent()
 }
 
 registrationIsClicked(value:boolean){
@@ -83,8 +89,11 @@ insertMarks(){
   this.authService.addMarks(newMarks,this.studentId).subscribe({
     next:(response)=>{
       console.log("response",response);
-      this.showFormOfMarks=false
+      this.showFormOfMarks=false;
+      this.toastr.success('Marks added successful')
+      this.calculate()
     },error:(error)=>{
+      this.toastr.error('Failed to add marks')
       console.log("error",error)
     }
   })
@@ -95,6 +104,17 @@ insertMarks(){
  this.submitted=false
 }
 
+deleteStudent(studentId:number){
+  this.authService.deleteStudent(studentId).subscribe({
+    next:(deleted=>{
+      this.getStudent();
+      console.log('this is deleted student',deleted)
+    }),
+    error:(error=>{
+      throw error.message
+    })
+  })
+} 
 
 registerStudent(){
   this.submitted=true;
@@ -102,9 +122,12 @@ registerStudent(){
     const studentData= this.studentForm.value;
     this.authService.addStudent(studentData).subscribe({
       next:(response)=>{
-        console.log("new student", response);
-        this.showStudentRegistration=false
+        console.log("new student", response.firstName);
+        this.showStudentRegistration=false;
+        this.toastr.success('Added successFull', response.lastName)
+        this.getStudent()
       },error:(error)=>{
+        this.toastr.error('Failed to register student')
         console.log("error message for student",error)
       }
     })
@@ -116,16 +139,9 @@ registerStudent(){
 }
 
 
-
-
-
 students:any=null
 
 exams:any=null
-
-
-
-
 
   getStudent(){
  this.authService.getStudent().subscribe({

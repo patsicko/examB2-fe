@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { FormBuilder, FormGroup, Validator } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -38,7 +37,7 @@ export class LoginComponent implements OnInit {
           this.authService.loginCloseButtonClicked(false)
           this.toastr.success('Login successful!');
         }), error:(error=>{
-          this.toastr.error('Login failed!');
+          this.toastr.error('Invalid email or password!');
         })
       })
       this.loginForm.reset()
@@ -53,8 +52,9 @@ export class LoginComponent implements OnInit {
     this.authService.loginCloseButtonClicked(value)
   
   }
-  bringSignup(value:boolean){
-    
+  showSignup(value:boolean){
+    this.authService.signupButtonClicked(value);
+    this.authService.loginButtonClicked(false)
   }
 
 }

@@ -31,7 +31,9 @@ export class SignupComponent implements OnInit {
       console.log("formdata", this.signupForm.value );
   this.authService.createUser(formdata).subscribe({
     next:(response=>{
-      console.log("response from server",response)
+      console.log("response from server",response);
+      this.authService.signupCloseButtonClicked(false)
+      this.authService.loginButtonClicked(true)
     }), error:(error=>{
       console.log("error from server",error)
     })
@@ -50,4 +52,9 @@ export class SignupComponent implements OnInit {
     this.authService.signupCloseButtonClicked(value)
   }
 
+
+  showLogin(value:boolean){
+  this.authService.loginButtonClicked(value)
+  this.authService.signupButtonClicked(false)
+  }
 }

@@ -18,7 +18,7 @@
           <a routerLink="/" class="text-white text-xl font-bold">MSSMS</a>
           <ul class="flex space-x-4">
             <li>
-              <a routerLink="/"  class="text-white hover:text-black cursor-pointer">Home</a>
+              <a routerLink="/"  class="text-white hover:text-black cursor-pointer" >Home</a>
             </li>
             <li *ngIf="!isAdmin">
                 <button type="button" (click)="showLoginForm(true)"  class="text-white hover:text-black cursor-pointer" > Login</button>
@@ -60,5 +60,6 @@
         <p>&copy; 2024 MSSMS. All rights reserved.</p>
       </footer> -->
 </div>
+<app-footer class="footer"></app-footer>
 
   

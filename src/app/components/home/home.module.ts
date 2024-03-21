@@ -34,7 +34,8 @@ import { HeaderComponent } from './header/header.component'
     SignupComponent,
     DashboardComponent,
     LandingpageComponent,
-    FooterComponent
+    FooterComponent,
+    HeaderComponent
   ]
 })
 export class HomeModule { }
